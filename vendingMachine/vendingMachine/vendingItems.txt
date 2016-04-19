@@ -1,4 +1,4 @@
-Popcorn,Doritos,Potato Chips,Cheetos
-Fritos,Gummy Worms,Cookies,Chex Mix
-Skittles,Snickers,M&M'S,Twix
-Kit Kat,Hersheys,Reese's,Butterfinger
+Popcorn,1.50,Doritos,2.00,Potato Chips,1.75,Cheetos,1.25
+Fritos,1.50,Gummy Worms,1.75,Cookies,2.25,Chex Mix,2.00
+Skittles,1.75,Snickers,1.25,M&M'S,1.50,Twix,1.75
+Kit Kat,1.50,Hersheys,1.50,Reese's,2.00,Butterfinger,1.75

@@ -1,5 +1,5 @@
 #include <iostream>
-#include "VendingMachine.h"
+#include "/home/user/Dropbox/CSCI 2270/Project/Olsen_Link_CSCI2270_FinalProject/vendingMachine/vendingMachine/include/VendingMachine.h"
 #include <fstream>
 #include <sstream>
 #include <string>
@@ -12,28 +12,43 @@ int main()
     string line;
     string row1;
     string name;
+    string price;
+    float price1;
     inFile.open("vendingItems.txt");
     if(inFile.good()){
         int index=0;
-        //this while loop reads in all the vending items and stores them into a hash table
+
+        //this while loop reads in all the vending items/prices and stores them into a hash table
         while (getline(inFile,line)){
             row1=line;
             stringstream ss(row1);
+            //get item name
             getline(ss,name,',');
-            //cout<<name<<endl;
-            vm.inserNode(name,index);
+            //get price
+            getline(ss,price,',');
+            price1 = stof(price,nullptr);
+            vm.inserNode(name,index,price1);
 
+            //get item name
             getline(ss,name,',');
-            //cout<<name<<endl;
-            vm.inserNode(name,index);
+            //get price
+            getline(ss,price,',');
+            price1 = stof(price,nullptr);
+            vm.inserNode(name,index,price1);
 
+            //get item name
             getline(ss,name,',');
-            //cout<<name<<endl;
-            vm.inserNode(name,index);
+            //get price
+            getline(ss,price,',');
+            price1 = stof(price,nullptr);
+            vm.inserNode(name,index,price1);
 
+            //get item name
             getline(ss,name,',');
-            //cout<<name<<endl;
-            vm.inserNode(name,index);
+            //get price
+            getline(ss,price,',');
+            price1 = stof(price,nullptr);
+            vm.inserNode(name,index,price1);
 
             index=index+1;
 
