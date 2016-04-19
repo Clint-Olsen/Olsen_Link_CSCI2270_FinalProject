@@ -1,0 +1,26 @@
+# depslib dependency file v1.0
+1460923028 source:/home/user/Dropbox/Computer Science/assignments/project2/vendingMachine/main.cpp
+	<iostream>
+	"VendingMachine.h"
+	<fstream>
+	<sstream>
+	<string>
+
+1460922758 source:/home/user/Dropbox/Computer Science/assignments/project2/vendingMachine/src/VendingMachine.cpp
+	"VendingMachine.h"
+	<iostream>
+
+1460920429 /home/user/Dropbox/Computer Science/assignments/project2/vendingMachine/include/VendingMachine.h
+	<iostream>
+
+1460923134 source:/home/user/Dropbox/CSCI 2270/Project/Olsen_Link_CSCI2270_FinalProject/vendingMachine/vendingMachine/main.cpp
+	<iostream>
+	"VendingMachine.h"
+	<fstream>
+	<sstream>
+	<string>
+
+1460922758 source:/home/user/Dropbox/CSCI 2270/Project/Olsen_Link_CSCI2270_FinalProject/vendingMachine/vendingMachine/src/VendingMachine.cpp
+	"VendingMachine.h"
+	<iostream>
+
