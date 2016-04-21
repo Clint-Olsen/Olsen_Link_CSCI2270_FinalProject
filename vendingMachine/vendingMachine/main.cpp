@@ -1,8 +1,11 @@
 #include <iostream>
-#include "/home/user/Dropbox/Computer Science/assignments/project2/Olsen_Link_CSCI2270_FinalProject/vendingMachine/vendingMachine/include/VendingMachine.h"
+#include "/home/user/Dropbox/CSCI 2270/Project/Olsen_Link_CSCI2270_FinalProject/vendingMachine/vendingMachine/include/VendingMachine.h"
 #include <fstream>
 #include <sstream>
 #include <string>
+//Things to fix:
+// 1. Looping menu if bad value
+
 using namespace std;
 
 int main()
@@ -13,6 +16,7 @@ int main()
     string row1;
     string name;
     string price;
+    int choose;
     float price1;
     inFile.open("vendingItems.txt");
     if(inFile.good()){
@@ -57,18 +61,32 @@ int main()
     else{
         cout<<"File did not open"<<endl;
     }
-    int userInput=0;
+    int userInput=1;
     while(userInput!=5){
+        vm.displayUserMenue();
+        cin>>userInput;
         if(userInput==1){
             vm.displayItemsAndQuantity();
         }
         if(userInput==2){
-            cout<<"Enter Item Name: ";
-            string whiteSpace;
-            string itemWanted;
-            getline(cin,whiteSpace);
-            getline(cin,itemWanted);
-            vm.makePurchase(itemWanted);
+            cout<<"Would you like to..."<<endl;
+            cout<<"1. Choose an item"<<endl;
+            cout<<"2. Surprise me"<<endl;
+            cin>>choose;
+            if(choose == 1){
+                cout<<"Enter Item Name: ";
+                string whiteSpace;
+                string itemWanted;
+                getline(cin,whiteSpace);
+                getline(cin,itemWanted);
+                vm.makePurchase(itemWanted);
+            }
+            else if(choose == 2){
+                vm.randomItem();
+            }
+            else{
+                cout<<"Invalid choice, please try again"<<endl;
+            }
         }
         if(userInput==3){
             vm.restock();
@@ -90,11 +108,13 @@ int main()
             }
 
         }
-        vm.displayUserMenue();
-        cin>>userInput;
+        //vm.displayUserMenue();
+        //cin>>userInput;
         if(userInput==5){
             cout<<"Goodbye!"<<endl;
+            break;
         }
     }
     return 0;
 }
+

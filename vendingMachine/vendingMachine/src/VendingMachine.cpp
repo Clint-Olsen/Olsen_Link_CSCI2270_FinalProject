@@ -1,6 +1,8 @@
-#include "/home/user/Dropbox/Computer Science/assignments/project2/Olsen_Link_CSCI2270_FinalProject/vendingMachine/vendingMachine/include/VendingMachine.h"
+#include "/home/user/Dropbox/CSCI 2270/Project/Olsen_Link_CSCI2270_FinalProject/vendingMachine/vendingMachine/include/VendingMachine.h"
 #include <iostream>
 #include <string>
+#include<cstdlib>
+#include<ctime>
 using namespace std;
 VendingMachine::VendingMachine()
 {
@@ -93,6 +95,7 @@ void VendingMachine::makePurchase(string item){
         return;
     }
     else{
+        cout<<"You bought "<<node->itemName<<" for $"<<node->price<<endl;
         revenue=revenue+node->price;
         node->quantity=node->quantity-1;
     }
@@ -113,6 +116,15 @@ void VendingMachine::adminMenue(){
     cout<<"3. Change the Price of an item"<<endl;
     cout<<"4. Return to Public Menu"<<endl;
 }
+void VendingMachine::changePrice(string item, int nprice){
+    VendingItem *node= findItem(item);
+    if(node != NULL && nprice > 0 && nprice <= 100){
+        node->price = nprice;
+    }
+    else{
+        cout<<"item not found"<<endl;
+    }
+}
 void VendingMachine::replaceItem(string deleteItem, string newItem,int newPrice){
     VendingItem *node=findItem(deleteItem);
     if(node==NULL){
@@ -129,7 +141,7 @@ void VendingMachine::adminCode(){
         adminMenue();
         cin>>adminInput;
         if(adminInput==1){
-            cout<<"You sold "<<revenue<<"$ worth of goods"<<endl;
+            cout<<"You sold $"<<revenue<<" worth of goods"<<endl;
             revenue=0;
         }
         if(adminInput==2){
@@ -146,8 +158,28 @@ void VendingMachine::adminCode(){
             getline(cin,newItemPrice);
             replaceItem(deleteItem,newItem,stoi(newItemPrice,nullptr,10));
         }
+        if(adminInput == 3){
+            cout<<"Enter item that you wish to change the price of: ";
+            string whiteSpace;
+            string changeItem;
+            getline(cin,whiteSpace);
+            getline(cin,changeItem);
+            cout<<"Enter the new price: ";
+            int price;
+            cin>>price;
+            changePrice(changeItem,price);
+        }
     }
 
+}
+
+void VendingMachine::randomItem(){
+    srand(time(0));
+    int r = rand() % 4;
+    VendingItem *temp = hashTable[r];
+    cout<<"You bought "<<temp->itemName<<" for $"<<temp->price<<endl;
+    temp->quantity = temp->quantity - 1;
+    revenue=revenue+temp->price;
 }
 
 VendingMachine::~VendingMachine()

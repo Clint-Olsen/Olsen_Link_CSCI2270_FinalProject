@@ -13,18 +13,21 @@
 1460920429 /home/user/Dropbox/Computer Science/assignments/project2/vendingMachine/include/VendingMachine.h
 	<iostream>
 
-1461080748 source:/home/user/Dropbox/CSCI 2270/Project/Olsen_Link_CSCI2270_FinalProject/vendingMachine/vendingMachine/main.cpp
+1461279311 source:/home/user/Dropbox/CSCI 2270/Project/Olsen_Link_CSCI2270_FinalProject/vendingMachine/vendingMachine/main.cpp
 	<iostream>
 	"/home/user/Dropbox/CSCI 2270/Project/Olsen_Link_CSCI2270_FinalProject/vendingMachine/vendingMachine/include/VendingMachine.h"
 	<fstream>
 	<sstream>
 	<string>
 
-1461080768 source:/home/user/Dropbox/CSCI 2270/Project/Olsen_Link_CSCI2270_FinalProject/vendingMachine/vendingMachine/src/VendingMachine.cpp
+1461279362 source:/home/user/Dropbox/CSCI 2270/Project/Olsen_Link_CSCI2270_FinalProject/vendingMachine/vendingMachine/src/VendingMachine.cpp
 	"/home/user/Dropbox/CSCI 2270/Project/Olsen_Link_CSCI2270_FinalProject/vendingMachine/vendingMachine/include/VendingMachine.h"
 	<iostream>
+	<string>
+	<cstdlib>
+	<ctime>
 
-1461079928 /home/user/Dropbox/CSCI 2270/Project/Olsen_Link_CSCI2270_FinalProject/vendingMachine/vendingMachine/include/VendingMachine.h
+1461278921 /home/user/Dropbox/CSCI 2270/Project/Olsen_Link_CSCI2270_FinalProject/vendingMachine/vendingMachine/include/VendingMachine.h
 	<iostream>
 
 1461274537 source:/home/user/Dropbox/Computer Science/assignments/project2/Olsen_Link_CSCI2270_FinalProject/vendingMachine/vendingMachine/main.cpp
