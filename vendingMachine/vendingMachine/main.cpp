@@ -1,5 +1,5 @@
 #include <iostream>
-#include "/home/user/Dropbox/CSCI 2270/Project/Olsen_Link_CSCI2270_FinalProject/vendingMachine/vendingMachine/include/VendingMachine.h"
+#include "/home/user/Dropbox/Computer Science/assignments/project2/Olsen_Link_CSCI2270_FinalProject/vendingMachine/vendingMachine/include/VendingMachine.h"
 #include <fstream>
 #include <sstream>
 #include <string>
@@ -58,23 +58,41 @@ int main()
         cout<<"File did not open"<<endl;
     }
     int userInput=0;
-    while(userInput!=4){
+    while(userInput!=5){
         if(userInput==1){
             vm.displayItemsAndQuantity();
         }
         if(userInput==2){
-
+            cout<<"Enter Item Name: ";
+            string whiteSpace;
+            string itemWanted;
+            getline(cin,whiteSpace);
+            getline(cin,itemWanted);
+            vm.makePurchase(itemWanted);
         }
         if(userInput==3){
+            vm.restock();
+        }
+        if(userInput==4){
+            cout<<"In case you have not read the read me file the password is 1234"<<endl;
+            cout<<"I know! its a password an idiot would put on his luggage"<<endl;
+            cout<<"Enter Password"<<endl;
+            string adminPassword;
+            string whiteSpace;
+            getline(cin,whiteSpace);
+            getline(cin,adminPassword);
+            if(adminPassword=="1234"){
+                vm.adminCode();
+                adminPassword="0";
+            }
+            else{
+                cout<<"not a valid password returning to main menu"<<endl;
+            }
 
         }
-        cout << "======Main Menu======" << endl;
-        cout << "1. Display Items" << endl;
-        cout << "2. Buy an Item" << endl;
-        cout << "3. Restock" << endl;
-        cout << "4. Quit" << endl;
+        vm.displayUserMenue();
         cin>>userInput;
-        if(userInput==4){
+        if(userInput==5){
             cout<<"Goodbye!"<<endl;
         }
     }
