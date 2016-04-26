@@ -23,5 +23,5 @@ Collaborators:
 None
 
 Open issues/bugs:
-Upon compliation, and error may occur on Linux based computers that states "fatal error: VendingMachine.h: no such file or directory". If this occurs, the #include statement that is currently set to #include "VendingMachine.h" needs to be set to a specfic path the main.cpp and VendingMachine.cpp files. To do this, use File Manager (Linux file searching utility) to find the exact path to the VendingMachine.h file. Take this path and add it to the include statements within the two specified files. It will have the for #include "/home/user/.../VendingMachine.h".
+Upon compliation, and error may occur on Linux based computers that states either "fatal error: VendingMachine.h: no such file or directory", "fatal error: Helper.h: no such file or directory" or both. If this occurs, the #include statement that is currently set to #include "VendingMachine.h" needs to be set to a specfic path the main.cpp and VendingMachine.cpp files. To do this, use File Manager (Linux file searching utility) to find the exact path to the VendingMachine.h file or Helper.h. Take this path and add it to the include statements within the two specified files. It will have the for #include "/home/user/.../VendingMachine.h" or  "/home/user/.../Helper.h".
 
