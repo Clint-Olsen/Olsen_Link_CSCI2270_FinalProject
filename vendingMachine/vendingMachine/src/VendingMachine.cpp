@@ -12,6 +12,7 @@ VendingMachine::VendingMachine()
     }
 }
 void VendingMachine::inserNode(string name, int index, float price){
+
     //adds item if no item exists at that index
     VendingItem *node = new VendingItem;
     if(hashTable[index]==NULL){
@@ -21,8 +22,8 @@ void VendingMachine::inserNode(string name, int index, float price){
         node->left=NULL;
         node->right=NULL;
         node->row= index+1;
-        //cout<<node->itemName<<endl;
     }
+
     //adds item to the end of the linked list starting at the index
     else{
         VendingItem *temp=hashTable[index];
@@ -34,11 +35,11 @@ void VendingMachine::inserNode(string name, int index, float price){
         temp->right=node;
         node->right=NULL;
         node->left=temp;
-        //cout<<node->itemName<<endl;
     }
 
 
 }
+
 //Displays the currently available items in the machine and the associated quantity
 void VendingMachine::displayItemsAndQuantity(){
     int count = 0;
@@ -65,7 +66,9 @@ void VendingMachine::displayItemsAndQuantity(){
     cout<<endl;
 }
 
+//Displays main menu
 void VendingMachine::displayUserMenue(){
+        cout<<endl;
         cout << "======Main Menu======" << endl;
         cout << "1. Display Items" << endl;
         cout << "2. Buy an Item" << endl;
@@ -73,6 +76,8 @@ void VendingMachine::displayUserMenue(){
         cout << "4. Admin Login" << endl;
         cout << "5. Quit"<<endl;
 }
+
+//finds item and returns pointer to that item
 VendingItem *VendingMachine::findItem(string item){
     for(int i=0;i<4;i++){
         VendingItem *temp=hashTable[i];
@@ -89,6 +94,8 @@ VendingItem *VendingMachine::findItem(string item){
     cout<<"Item does not exist!"<<endl;
     return NULL;
 }
+
+//displays purchase and updates quantity
 void VendingMachine::makePurchase(string item){
     VendingItem *node= findItem(item);
     if(node==NULL){
@@ -100,6 +107,8 @@ void VendingMachine::makePurchase(string item){
         node->quantity=node->quantity-1;
     }
 }
+
+//sets all item quantities to 10
 void VendingMachine::restock(){
     for(int i=0;i<4;i++){
         VendingItem *temp=hashTable[i];
@@ -110,12 +119,17 @@ void VendingMachine::restock(){
         }
     }
 }
+
+//displays administrator menu
 void VendingMachine::adminMenue(){
+    cout<<endl;
     cout<<"1. Withdraw Money and Display Revenue"<<endl;
     cout<<"2. Replace an item"<<endl;
     cout<<"3. Change the Price of an item"<<endl;
     cout<<"4. Return to Public Menu"<<endl;
 }
+
+//updates new price to item passed in
 void VendingMachine::changePrice(string item, int nprice){
     VendingItem *node= findItem(item);
     if(node != NULL && nprice > 0 && nprice <= 100){
@@ -125,6 +139,8 @@ void VendingMachine::changePrice(string item, int nprice){
         cout<<"item not found"<<endl;
     }
 }
+
+//deletes old item name and prices and replaces them with new passed in values
 void VendingMachine::replaceItem(string deleteItem, string newItem,int newPrice){
     VendingItem *node=findItem(deleteItem);
     if(node==NULL){
@@ -134,45 +150,93 @@ void VendingMachine::replaceItem(string deleteItem, string newItem,int newPrice)
     node->price=newPrice;
 
 }
+
+//selection for admin options
 void VendingMachine::adminCode(){
+    cout<<endl;
     cout<<"Welcome admin would you like to..."<<endl;
     int adminInput=0;
+    string userI;
     while(adminInput!=4){
+        //print menu
         adminMenue();
-        cin>>adminInput;
+
+        //read menu selection as string
+        getline(cin,userI);
+
+        //test for valid one digit int and reject if not
+        //checks to see if the number is valid and if the argument is a string
+        if(userI.size() == 1){
+            adminInput = stoi(userI,nullptr,10);
+            if(adminInput != 1 and adminInput != 2 and adminInput != 3 and adminInput !=4){
+                cout<<"Invalid input, please try again"<<endl;
+            }
+        }
+        else{
+            cout<<"Invalid input, please try again"<<endl;
+        }
+        //cin>>adminInput;
+
+        //displays the total profits since last withdrawal and sets profits back to zero
         if(adminInput==1){
             cout<<"You sold $"<<revenue<<" worth of goods"<<endl;
             revenue=0;
         }
+
+        //allows user to replace an item with a new item and price within reason
         if(adminInput==2){
             cout<<"Enter Item to get rid of: ";
-            string whiteSpace;
+            //string whiteSpace;
             string deleteItem;
-            getline(cin,whiteSpace);
+            //getline(cin,whiteSpace);
             getline(cin,deleteItem);
             cout<<"Enter the New Item: ";
             string newItem;
             getline(cin,newItem);
-            cout<<"Enter the Price of the New Item: ";
+            cout<<"Enter the Price of the New Item ($1-$9): ";
             string newItemPrice;
             getline(cin,newItemPrice);
-            replaceItem(deleteItem,newItem,stoi(newItemPrice,nullptr,10));
+
+            //checks for valid price input
+            if(newItemPrice.size()==1){
+                replaceItem(deleteItem,newItem,stoi(newItemPrice,nullptr,10));
+            }
+            else{
+                cout<<"Invalid input, please try again"<<endl;
+            }
         }
+
+        //Allows user to change price within reason
         if(adminInput == 3){
+            //gather user input
             cout<<"Enter item that you wish to change the price of: ";
-            string whiteSpace;
             string changeItem;
-            getline(cin,whiteSpace);
+            string price;
             getline(cin,changeItem);
-            cout<<"Enter the new price: ";
-            int price;
-            cin>>price;
-            changePrice(changeItem,price);
+            cout<<"Enter the new price($1-$9): ";
+            getline(cin,price);
+
+            //checks for valid price input
+            if(price.size()==1){
+                changePrice(changeItem, stoi(price,nullptr,10));
+            }
+            else{
+                cout<<"Invalid input, please try again"<<endl;
+            }
+
         }
+
+        //returns to main menu
+        if(adminInput == 4){
+            cout<<"Returning to main menu..."<<endl;
+            return;
+        }
+        adminInput = 0;
     }
 
 }
 
+//generates random index based on time and selects an item
 void VendingMachine::randomItem(){
     srand(time(0));
     int r = rand() % 4;

@@ -3,8 +3,6 @@
 #include <fstream>
 #include <sstream>
 #include <string>
-//Things to fix:
-// 1. Looping menu if bad value
 
 using namespace std;
 
@@ -16,8 +14,11 @@ int main()
     string row1;
     string name;
     string price;
-    int choose;
+    int choose = 0;
     float price1;
+    int userInput=0;
+    string userI;
+
     inFile.open("vendingItems.txt");
     if(inFile.good()){
         int index=0;
@@ -61,43 +62,78 @@ int main()
     else{
         cout<<"File did not open"<<endl;
     }
-    int userInput=1;
+
     while(userInput!=5){
         vm.displayUserMenue();
-        cin>>userInput;
+        //read menu selection as string
+        getline(cin,userI);
+
+        //test for valid one digit int and reject if not
+        //checks to see if the number is valid and if the argument is a string
+        if(userI.size() == 1){
+            userInput = stoi(userI,nullptr,10);
+            if(userInput != 1 and userInput != 2 and userInput != 3 and userInput !=4 and userInput != 5){
+                cout<<"Invalid input, please try again"<<endl;
+            }
+        }
+        else{
+            cout<<"Invalid input, please try again"<<endl;
+        }
+
+        //display items within the machine, quantity and prices
         if(userInput==1){
             vm.displayItemsAndQuantity();
         }
-        if(userInput==2){
+
+        // selection option from the vending machine
+        else if(userInput==2){
+            //submenu
             cout<<"Would you like to..."<<endl;
             cout<<"1. Choose an item"<<endl;
             cout<<"2. Surprise me"<<endl;
-            cin>>choose;
+
+            //gather input from user for option
+            getline(cin,userI);
+
+            //test for valid one digit int and reject if not
+            //checks to see if the number is valid and if the argument is a string based on size
+            if(userI.size() == 1){
+                choose = stoi(userI,nullptr,10);
+                if(choose != 1 and choose != 2){
+                    cout<<"Invalid input, please try again"<<endl;
+                    }
+                }
+            else{
+                cout<<"Invalid input, please try again"<<endl;
+            }
+
+            //user manually enters item name
             if(choose == 1){
                 cout<<"Enter Item Name: ";
-                string whiteSpace;
                 string itemWanted;
-                getline(cin,whiteSpace);
                 getline(cin,itemWanted);
                 vm.makePurchase(itemWanted);
             }
+
+            //random item is generated
             else if(choose == 2){
                 vm.randomItem();
             }
-            else{
-                cout<<"Invalid choice, please try again"<<endl;
-            }
+
         }
-        if(userInput==3){
+
+        //vending machine is restocked to capacity of 10 per item
+        else if(userInput==3){
             vm.restock();
         }
-        if(userInput==4){
+
+        //prompts user for authentication to enter vending machine settings
+        else if(userInput==4){
             cout<<"In case you have not read the read me file the password is 1234"<<endl;
             cout<<"I know! its a password an idiot would put on his luggage"<<endl;
             cout<<"Enter Password"<<endl;
             string adminPassword;
-            string whiteSpace;
-            getline(cin,whiteSpace);
+
             getline(cin,adminPassword);
             if(adminPassword=="1234"){
                 vm.adminCode();
@@ -108,12 +144,13 @@ int main()
             }
 
         }
-        //vm.displayUserMenue();
-        //cin>>userInput;
-        if(userInput==5){
+
+        //exits program
+        else if(userInput==5){
             cout<<"Goodbye!"<<endl;
             break;
         }
+        userInput = 0;
     }
     return 0;
 }
