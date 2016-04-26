@@ -11,6 +11,7 @@
 				<Option object_output="obj/Debug/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
+				<Option parameters="vendingItems.txt" />
 				<Compiler>
 					<Add option="-g" />
 				</Compiler>
@@ -32,8 +33,10 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="include/Helper.h" />
 		<Unit filename="include/VendingMachine.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="src/Helper.cpp" />
 		<Unit filename="src/VendingMachine.cpp" />
 		<Extensions>
 			<code_completion />
