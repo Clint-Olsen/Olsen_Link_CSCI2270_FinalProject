@@ -1,4 +1,4 @@
-#include "/home/user/Dropbox/CSCI 2270/Project/Olsen_Link_CSCI2270_FinalProject/vendingMachine/vendingMachine/include/VendingMachine.h"
+#include "VendingMachine.h"
 #include <iostream>
 #include <string>
 #include<cstdlib>
@@ -9,15 +9,15 @@ VendingMachine::VendingMachine()
 {
     //initializing the table to NULL
     for(int i=0; i<4;i++){
-        hashTable[i]=NULL;
+        table[i]=NULL;
     }
 }
 void VendingMachine::inserNode(string name, int index, float price){
 
     //adds item if no item exists at that index
     VendingItem *node = new VendingItem;
-    if(hashTable[index]==NULL){
-        hashTable[index]=node;
+    if(table[index]==NULL){
+        table[index]=node;
         node->itemName=name;
         node->price = price;
         node->left=NULL;
@@ -27,7 +27,7 @@ void VendingMachine::inserNode(string name, int index, float price){
 
     //adds item to the end of the linked list starting at the index
     else{
-        VendingItem *temp=hashTable[index];
+        VendingItem *temp=table[index];
         while(temp->right!=NULL){
                 temp=temp->right;
         }
@@ -47,8 +47,8 @@ void VendingMachine::displayItemsAndQuantity(){
     cout<<"                    ======Cool Vending Machine Name======"<<endl;
     cout<<"   ";
     for(int i=0;i<4;i++){
-        VendingItem *temp=hashTable[i];
-        cout<<hashTable[i]->itemName<<": $"<<hashTable[i]->price<<"-"<<hashTable[i]->quantity;
+        VendingItem *temp=table[i];
+        cout<<table[i]->itemName<<": $"<<table[i]->price<<"-"<<table[i]->quantity;
         count++;
         if(count % 4 == 0){
             cout<<endl;
@@ -71,7 +71,7 @@ void VendingMachine::displayItemsAndQuantity(){
 //finds item and returns pointer to that item
 VendingItem *VendingMachine::findItem(string item){
     for(int i=0;i<4;i++){
-        VendingItem *temp=hashTable[i];
+        VendingItem *temp=table[i];
         if(temp->itemName==item){
             return temp;
         }
@@ -98,12 +98,12 @@ void VendingMachine::makePurchase(string item){
         return;
     }
     if(node->quantity == 0){
-        cout<<node->itemName<<" is out of stock. Please enter log into the admin menu to restock."<<endl;
+        cout<<node->itemName<<" is out of stock. Please log into the admin menu to restock."<<endl;
         return;
     }
     srand(time(0));
-    int r = rand() % 10;
-    if(r==5){
+    int r = rand() % 5;
+    if(r==3){
         nameOfItemStuck=item;
         itemStuck=true;
         cout<<"Shoot! Your item got stuck in the vending machine."<<endl;
@@ -126,7 +126,7 @@ void VendingMachine::restock(){
         return;
     }
     for(int i=0;i<4;i++){
-        VendingItem *temp=hashTable[i];
+        VendingItem *temp=table[i];
         temp->quantity=5;
         while(temp->right!=NULL){
             temp=temp->right;
@@ -174,7 +174,7 @@ void VendingMachine::randomItem(){
     }
     srand(time(0));
     int r = rand() % 4;
-    VendingItem *temp = hashTable[r];
+    VendingItem *temp = table[r];
     if(temp->quantity == 0){
         cout<<temp->itemName<<" is out of stock. Please enter log into the admin menu to restock."<<endl;
         return;
@@ -191,6 +191,7 @@ int VendingMachine::revenueWithdrawal(){
     return temp;
 }
 
+//if item is stuck, it is released and processed as a purchase
 void VendingMachine::freeItem(){
     if(itemStuck==true){
         itemStuck=false;
@@ -202,18 +203,19 @@ void VendingMachine::freeItem(){
     }
 }
 
+//frees memory allocated to vendingItems
 void VendingMachine::deleteVendingMachine(){
     VendingItem *temp2 = NULL;
     for(int i=0;i<4;i++){
-        VendingItem *temp=hashTable[i];
+        VendingItem *temp=table[i];
         while(temp->right!=NULL){
             temp=temp->right;
         }
         temp2 = temp->left;
-        while(temp != hashTable[i]){
+        while(temp != table[i]){
             delete temp;
             temp = temp2;
-            if(temp != hashTable[i]){
+            if(temp != table[i]){
                 temp2 = temp->left;
             }
         }

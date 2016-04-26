@@ -1,6 +1,6 @@
 #include <iostream>
-#include "/home/user/Dropbox/CSCI 2270/Project/Olsen_Link_CSCI2270_FinalProject/vendingMachine/vendingMachine/include/VendingMachine.h"
-#include "/home/user/Dropbox/CSCI 2270/Project/Olsen_Link_CSCI2270_FinalProject/vendingMachine/vendingMachine/include/Helper.h"
+#include "VendingMachine.h"
+#include "Helper.h"
 #include <fstream>
 #include <sstream>
 #include <string>
@@ -20,7 +20,6 @@ int main(int argc, char **argv)
     int userInput=0;
     string userI;
 
-    //inFile.open("vendingItems.txt");
     inFile.open(argv[1]);
     if(inFile.good()){
         int index=0;
@@ -104,10 +103,12 @@ int main(int argc, char **argv)
                 choose = stoi(userI,nullptr,10);
                 if(choose != 1 and choose != 2){
                     cout<<"Invalid input, please try again"<<endl;
+                    choose = 0;
                     }
                 }
             else{
                 cout<<"Invalid input, please try again"<<endl;
+                choose = 0;
             }
 
             //user manually enters item name

@@ -1,4 +1,4 @@
-#include "/home/user/Dropbox/CSCI 2270/Project/Olsen_Link_CSCI2270_FinalProject/vendingMachine/vendingMachine/include/Helper.h"
+#include "Helper.h"
 #include <iostream>
 
 using namespace std;

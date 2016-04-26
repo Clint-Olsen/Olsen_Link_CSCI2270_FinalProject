@@ -29,7 +29,7 @@ class VendingMachine
     protected:
     private:
         int revenue=0;
-        VendingItem* hashTable[4];
+        VendingItem* table[4];
         VendingItem *findItem(std::string item);
         bool itemStuck=false;
         std::string nameOfItemStuck;
