@@ -73,7 +73,12 @@ int main(int argc, char **argv)
         //test for valid one digit int and reject if not
         //checks to see if the number is valid and if the argument is a string
         if(userI.size() == 1){
-            userInput = stoi(userI,nullptr,10);
+            try {
+              userInput = stoi(userI,nullptr,10);
+            }catch(const invalid_argument e) {
+              
+            }
+
             if(userInput != 1 and userInput != 2 and userInput != 3 and userInput !=4){
                 cout<<"Invalid input, please try again"<<endl;
             }
@@ -150,7 +155,12 @@ int main(int argc, char **argv)
                     //test for valid one digit int and reject if not
                     //checks to see if the number is valid and if the argument is a string
                     if(userI.size() == 1){
-                        adminInput = stoi(userI,nullptr,10);
+                        try{
+                          adminInput = stoi(userI,nullptr,10);
+                        }catch(const invalid_argument e) {
+
+                        }
+
                         if(adminInput != 1 and adminInput != 2 and adminInput != 3 and adminInput !=4 and adminInput != 5 and adminInput != 6){
                             cout<<"Invalid input, please try again"<<endl;
                         }
@@ -200,7 +210,12 @@ int main(int argc, char **argv)
 
                         //checks for valid price input
                         if(price.size()==1){
-                            vm.changePrice(changeItem, stoi(price,nullptr,10));
+                            try{
+                              vm.changePrice(changeItem, stoi(price,nullptr,10));
+                            }catch(const invalid_argument e){
+                              cout << "Invalid input" << endl;
+                            }
+
                         }
                         else{
                             cout<<"Invalid input, please try again"<<endl;
@@ -242,4 +257,3 @@ int main(int argc, char **argv)
     }
     return 0;
 }
-
